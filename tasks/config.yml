@@ -1,0 +1,16 @@
+---
+- name: add firewall rules
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    state: enabled
+
+- name: firewall configuration for new rule
+  systemd:
+    name: firewalld
+    state: reloaded
+          
+- name: copy index file to apache directory
+  copy:
+    src: files/index.html
+    dest: /var/www/html/
